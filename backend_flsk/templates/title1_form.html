@@ -10,6 +10,7 @@
         </h2>
         <form class="pure-form pure-form-stacked" style="padding-left:50px; padding-right:50px" action='{{ url_for("results") }}' method="POST">
             <fieldset>
+                <!-- State selection box -->
                 <label for="State"><strong>Enter State</strong></label>
                 <select name="State" id="State" required>
                     <option value="" disabled selected>Select State</option>
@@ -73,69 +74,80 @@
                     <option style="color:black" value="WI">Wisconsin</option>
                     <option style="color:black" value="WY">Wyoming</option>
                 </select>
-                <!-- <input id="State" name="State" placeholder="State" type="text" required /> -->
                 <span class="pure-form-message" style="color:crimson">This is a required field.</span><br>
 
+                <!-- Locale selection box-->
                 <label for="Locale"><strong>Enter Locale</strong></label>
                 <select name="Locale" id="Locale" required>
                     <option style="color:black" value="" disabled selected>Select Locale</option>
                     <option style="color:black" value="113">11-City: Large</option>
                     <option style="color:black" value="117">12-City: Mid-size</option>
                     <option style="color:black" value="114">13-City: Small</option>
+
                     <option style="color:black" value="111">21-Suburb: Large</option>
                     <option style="color:black" value="110">22-Suburb: Mid-size</option>
                     <option style="color:black" value="120">23-Suburb: Small</option>
+
                     <option style="color:black" value="119">31-Town: Fringe</option>
                     <option style="color:black" value="118">32-Town: Distant</option>
                     <option style="color:black" value="116">33-Town: Remote</option>
+
                     <option style="color:black" value="109">41-Rural: Fringe</option>
                     <option style="color:black" value="112">42-Rural: Distant</option>
                     <option style="color:black" value="115">43-Rural: Remote</option>
                 </select>
-                <!--<input id="Locale" name="Locale" placeholder="Locale" type="text" required />-->
                 <span style="color:crimson" class="pure-form-message">This is a required field.</span>
                 <br>
 
+                <!-- Total Student Population Input -->
                 <label for="Total"><strong>Enter Total Student Population</strong></label>
                 <input id="Total" name="Total" placeholder="0" type="text" required />
                 <span style="color:crimson" class="pure-form-message">This is a required field.</span>
                 <br>
 
+                <!-- Asian Student Population Input -->
                 <label for="Asian"><strong>Enter Number of Asian Students</strong></label>
                 <input id="Asian" name="Asian" placeholder="0" type="text" required />
                 <span style="color:crimson" class="pure-form-message">This is a required field.</span>
                 <br>
 
+                <!-- Hispanic Student Population Input -->
                 <label for="Hispanic"><strong>Enter Number of Hispanic Students</strong></label>
                 <input id="Hispanic" name="Hispanic" placeholder="0" type="text" required />
                 <span style="color:crimson" class="pure-form-message">This is a required field.</span>
                 <br>
 
+                <!-- Black Student Population Input -->
                 <label for="Black"><strong>Enter Number of Black Students</strong></label>
                 <input id="Black" name="Black" placeholder="0" type="text" required />
                 <span style="color:crimson" class="pure-form-message">This is a required field.</span>
                 <br>
 
+                <!-- White Student Population Input -->
                 <label for="White"><strong>Enter Number of White Students</strong></label>
                 <input id="White" name="White" placeholder="0" type="text" required />
                 <span style="color:crimson" class="pure-form-message">This is a required field.</span>
                 <br>
 
+                <!-- Hawaiian Student Population Input -->
                 <label for="Hawaiian"><strong>Enter Number of Hawaiian Students</strong></label>
                 <input id="Hawaiian" name="Hawaiian" placeholder="0" type="text" required />
                 <span style="color:crimson" class="pure-form-message">This is a required field.</span>
                 <br>
 
+                <!-- Mixed Student Population Input -->
                 <label for="Mixed"><strong>Enter Number of Mixed Students</strong></label>
                 <input id="Mixed" name="Mixed" placeholder="0" type="text" required />
                 <span style="color:crimson" class="pure-form-message">This is a required field.</span>
                 <br>
 
+                <!-- Free Lunch Eligible Students Input -->
                 <label for="Free"><strong>Enter Number of Students who get Free Lunch</strong></label>
                 <input id="Free" name="Free" placeholder="0" type="text" required />
                 <span style="color:crimson" class="pure-form-message">This is a required field.</span>
                 <br>
 
+                <!-- Reduced Lunch Eligible Students Input -->
                 <label for="Reduced"><strong>Enter Number of Students who get Reduced Lunch</strong></label>
                 <input id="Reduced" name="Free" placeholder="0" type="text" required />
                 <span style="color:crimson" class="pure-form-message">This is a required field.</span>
