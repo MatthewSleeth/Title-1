@@ -23,7 +23,7 @@ def results():
     'NM':40, 'NJ':41,'PA':42, 'ND':43, 'NH': 44, 'MI':45, 'KS':46, 'CO':47, 'VT':48, 'DC':49, 'WA':50, 'IL':51,
     'AK': 52, 'AZ':53,'TN':54, 'TN':55}
     
-    user_state = state_encodings[request.form.get('State').to_upper()]
+    user_state = state_encodings[request.form.get('State').upper()]
     user_locale = request.form.get('Locale')
     user_total = request.form.get('Total')
     user_asian = request.form.get('Asian')
