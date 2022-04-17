@@ -9,6 +9,7 @@ import {
   Button,
   MenuItem,
 } from "@mui/material";
+import { height, width } from "@mui/system";
 
 export default function Home() {
   const [states, setStates] = useState([]);
@@ -66,53 +67,6 @@ export default function Home() {
       .catch((error) => console.log(error));
   };
 
-  // useEffect(() => {
-  //   fetch("http://localhost:5000/results", {
-  //     methods: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //     .then((response) => response.json())
-  //     .then((response) => setResult(response))
-  //     .catch((error) => console.log(error));
-  // }, []);
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   if (
-  //     state &&
-  //     locale &&
-  //     totalStudents &&
-  //     asianStudents &&
-  //     hispanicStudents &&
-  //     blackStudents &&
-  //     whiteStudents &&
-  //     hawaiianStudents &&
-  //     mixedStudents &&
-  //     freeLunchStudents &&
-  //     reducedLunchStudents
-  //   ) {
-  //     fetch("http://localhost:8080/user.json", {
-  //       method: "POST",
-  //       headers: { "Content-type": "application/json" },
-  //       body: JSON.stringify({
-  //         state,
-  //         locale,
-  //         totalStudents,
-  //         asianStudents,
-  //         hispanicStudents,
-  //         blackStudents,
-  //         whiteStudents,
-  //         hawaiianStudents,
-  //         mixedStudents,
-  //         freeLunchStudents,
-  //         reducedLunchStudents,
-  //       }),
-  //     });
-  //   }
-  // };
-
   return (
     <>
       <Box
@@ -121,9 +75,9 @@ export default function Home() {
           width: "100%",
           maxheight: false,
           maxwidth: false,
-          bgcolor: "primary.main",
-          borderBottom: 1.7,
-          borderColor: "#06818a",
+          bgcolor: "#3A3845",
+          borderBottom: 3,
+          borderColor: "white",
         }}
       >
         <Typography
@@ -132,6 +86,7 @@ export default function Home() {
           sx={{
             padding: 4,
             fontWeight: "medium",
+            textAlign: "center",
           }}
         >
           Title One Funding: Eligibility Predictor
@@ -140,23 +95,41 @@ export default function Home() {
       <Box
         component="div"
         sx={{
-          height: 600,
+          height: "auto",
           maxheight: false,
           maxwidth: false,
-          bgcolor: "primary.white",
+          bgcolor: "#F7CCAC",
+          paddingTop: "4ch",
+          paddingBottom: "4ch",
           "& .MuiTextField-root": { bgcolor: "white", m: 1, width: "25ch" },
           "& .MuiButton-root": {
             width: "15ch",
             fontSize: "1.5ch",
+            marginBottom: "3ch",
+            marginLeft: "35ch",
+            bgcolor: "#826F66",
+            ":hover": {
+              bgcolor: "#C69B7B",
+            },
           },
         }}
       >
-        <form onSubmit={handleSubmit}>
-          <Grid container spacing={2} sx={{ m: 1 }}>
-            <Grid item xs={12}>
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
-                  Enter State
+        <Paper
+          elevation={3}
+          sx={{
+            width: "55%",
+            margin: "auto",
+            paddingTop: "2ch",
+            paddingBottom: "2ch",
+          }}
+        >
+          <form onSubmit={handleSubmit}>
+            <Grid container spacing={0} align="center" sx={{ m: 1 }}>
+              <Grid item container xs={12}>
+                <Grid item xs={6} alignSelf="center">
+                  <Typography variant="body1" color="initial">
+                    Enter State
+                  </Typography>
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
@@ -178,11 +151,9 @@ export default function Home() {
                   </TextField>
                 </Grid>
               </Grid>
-            </Grid>
 
-            <Grid item xs={12}>
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
+              <Grid item container xs={12}>
+                <Grid item xs={6} alignSelf="center">
                   Enter Locale
                 </Grid>
                 <Grid item xs={6}>
@@ -205,11 +176,9 @@ export default function Home() {
                   </TextField>
                 </Grid>
               </Grid>
-            </Grid>
 
-            <Grid item xs={12}>
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
+              <Grid item container xs={12}>
+                <Grid item xs={6} alignSelf="center">
                   Enter Total Student Population
                 </Grid>
                 <Grid item xs={6}>
@@ -220,15 +189,13 @@ export default function Home() {
                     type="number"
                     min="0"
                     onChange={handleChange}
-                    helperText="Enter a number"
+                    helperText="Enter a number (minimum 0)"
                   />
                 </Grid>
               </Grid>
-            </Grid>
 
-            <Grid item xs={12}>
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
+              <Grid item container xs={12}>
+                <Grid item xs={6} alignSelf="center">
                   Enter Number of Asian Students
                 </Grid>
                 <Grid item xs={6}>
@@ -239,15 +206,13 @@ export default function Home() {
                     type="number"
                     min="0"
                     onChange={handleChange}
-                    helperText="Enter a number"
+                    helperText="Enter a number (minimum 0)"
                   />
                 </Grid>
               </Grid>
-            </Grid>
 
-            <Grid item xs={12}>
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
+              <Grid item container xs={12}>
+                <Grid item xs={6} alignSelf="center">
                   Enter Number of Hispanic Students
                 </Grid>
                 <Grid item xs={6}>
@@ -258,15 +223,13 @@ export default function Home() {
                     type="number"
                     min="0"
                     onChange={handleChange}
-                    helperText="Enter a number"
+                    helperText="Enter a number (minimum 0)"
                   />
                 </Grid>
               </Grid>
-            </Grid>
 
-            <Grid item xs={12}>
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
+              <Grid item container xs={12}>
+                <Grid item xs={6} alignSelf="center">
                   Enter Number of Black Students
                 </Grid>
                 <Grid item xs={6}>
@@ -277,15 +240,13 @@ export default function Home() {
                     type="number"
                     min="0"
                     onChange={handleChange}
-                    helperText="Enter a number"
+                    helperText="Enter a number (minimum 0)"
                   />
                 </Grid>
               </Grid>
-            </Grid>
 
-            <Grid item xs={12}>
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
+              <Grid item container xs={12}>
+                <Grid item xs={6} alignSelf="center">
                   Enter Number of White Students
                 </Grid>
                 <Grid item xs={6}>
@@ -296,15 +257,13 @@ export default function Home() {
                     type="number"
                     min="0"
                     onChange={handleChange}
-                    helperText="Enter a number"
+                    helperText="Enter a number (minimum 0)"
                   />
                 </Grid>
               </Grid>
-            </Grid>
 
-            <Grid item xs={12}>
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
+              <Grid item container xs={12}>
+                <Grid item xs={6} alignSelf="center">
                   Enter Number of Hawaiian Students
                 </Grid>
                 <Grid item xs={6}>
@@ -315,15 +274,13 @@ export default function Home() {
                     type="number"
                     min="0"
                     onChange={handleChange}
-                    helperText="Enter a number"
+                    helperText="Enter a number (minimum 0)"
                   />
                 </Grid>
               </Grid>
-            </Grid>
 
-            <Grid item xs={12}>
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
+              <Grid item container xs={12}>
+                <Grid item xs={6} alignSelf="center">
                   Enter Number of Mixed Students
                 </Grid>
                 <Grid item xs={6}>
@@ -334,15 +291,13 @@ export default function Home() {
                     type="number"
                     min="0"
                     onChange={handleChange}
-                    helperText="Enter a number"
+                    helperText="Enter a number (minimum 0)"
                   />
                 </Grid>
               </Grid>
-            </Grid>
 
-            <Grid item xs={12}>
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
+              <Grid item container xs={12}>
+                <Grid item xs={6} alignSelf="center">
                   Enter Number of Students who get Free Lunch
                 </Grid>
                 <Grid item xs={6}>
@@ -353,15 +308,13 @@ export default function Home() {
                     type="number"
                     min="0"
                     onChange={handleChange}
-                    helperText="Enter a number"
+                    helperText="Enter a number (minimum 0)"
                   />
                 </Grid>
               </Grid>
-            </Grid>
 
-            <Grid item xs={12}>
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
+              <Grid item container xs={12}>
+                <Grid item xs={6} alignSelf="center">
                   Enter Number of Students who get Reduced Lunch
                 </Grid>
                 <Grid item xs={6}>
@@ -372,19 +325,19 @@ export default function Home() {
                     type="number"
                     min="0"
                     onChange={handleChange}
-                    helperText="Enter a number"
+                    helperText="Enter a number (minimum 0)"
                   />
                 </Grid>
               </Grid>
-            </Grid>
 
-            <Grid item>
-              <Button variant="contained" color="primary" type="submit">
-                SUBMIT
-              </Button>
+              <Grid item>
+                <Button variant="contained" type="submit">
+                  SUBMIT
+                </Button>
+              </Grid>
             </Grid>
-          </Grid>
-        </form>
+          </form>
+        </Paper>
       </Box>
     </>
   );
