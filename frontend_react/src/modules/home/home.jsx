@@ -1,10 +1,21 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import { Box, Typography, Grid, Paper, TextField, Button } from "@mui/material";
+import { useEffect, useState, useHistory } from "react";
+import {
+  Box,
+  Typography,
+  Grid,
+  Paper,
+  TextField,
+  Button,
+  MenuItem,
+} from "@mui/material";
 
 export default function Home() {
-  const [state, setState] = useState(); // enter some default value
+  const [state, setState] = useState(1); // enter some default value
+  const [states, setStates] = useState([]); // enter some default value
   const [locale, setLocale] = useState(); // enter some default value
+  const [locales, setLocales] = useState([]); // enter some default value
+
   const [totalStudents, setTotalStudents] = useState(); // enter some default value
   const [asianStudents, setAsianStudents] = useState(); // enter some default value
   const [hispanicStudents, setHispanicStudents] = useState(); // enter some default value
@@ -15,19 +26,33 @@ export default function Home() {
   const [freeLunchStudents, setFreeLunchStudents] = useState(); // enter some default value
   const [reducedLunchStudents, setReducedLunchStudents] = useState(); // enter some default value
 
-  const [result, setResult] = useState([]);
-
   useEffect(() => {
-    fetch("http://localhost:5000/results", {
-      methods: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    fetch("http://localhost:8000/states")
       .then((response) => response.json())
-      .then((response) => setResult(response))
+      .then((data) => setStates(data))
       .catch((error) => console.log(error));
   }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/locales")
+      .then((response) => response.json())
+      .then((data) => setLocales(data))
+      .catch((error) => console.log(error));
+  }, []);
+
+  // const [formValues, setFormValues] = useState(defaultValues);
+
+  // useEffect(() => {
+  //   fetch("http://localhost:5000/results", {
+  //     methods: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((response) => setResult(response))
+  //     .catch((error) => console.log(error));
+  // }, []);
 
   const handleStateChange = (event) => {
     setState(event.target.value);
@@ -74,6 +99,47 @@ export default function Home() {
     setReducedLunchStudents(event.target.value);
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("Working");
+  };
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   if (
+  //     state &&
+  //     locale &&
+  //     totalStudents &&
+  //     asianStudents &&
+  //     hispanicStudents &&
+  //     blackStudents &&
+  //     whiteStudents &&
+  //     hawaiianStudents &&
+  //     mixedStudents &&
+  //     freeLunchStudents &&
+  //     reducedLunchStudents
+  //   ) {
+  //     fetch("http://localhost:8000/user.json", {
+  //       method: "POST",
+  //       headers: { "Content-type": "application/json" },
+  //       body: JSON.stringify({
+  //         state,
+  //         locale,
+  //         totalStudents,
+  //         asianStudents,
+  //         hispanicStudents,
+  //         blackStudents,
+  //         whiteStudents,
+  //         hawaiianStudents,
+  //         mixedStudents,
+  //         freeLunchStudents,
+  //         reducedLunchStudents,
+  //       }),
+  //     })
+  //     .then(() => history.push("/"));
+  //   }
+  // };
+
   return (
     <>
       <Box
@@ -112,39 +178,33 @@ export default function Home() {
           },
         }}
       >
-        <div>
+        <form onSubmit={handleSubmit}>
           <Grid container spacing={2} sx={{ m: 1 }}>
             <Grid item xs={12}>
               <Grid container spacing={2}>
                 <Grid item xs={6}>
                   Enter State
                 </Grid>
-                {state ? (
-                  <Grid item xs={6}>
-                    <TextField
-                      id="state"
-                      variant="outlined"
-                      select
-                      label="Select"
-                      value={state}
-                      onChange={handleStateChange}
-                      helperText="Please select your state"
-                    />
-                  </Grid>
-                ) : (
-                  <Grid item xs={6}>
-                    <TextField
-                      error
-                      id="state"
-                      variant="outlined"
-                      select
-                      label="Select"
-                      value={state}
-                      onChange={handleStateChange}
-                      helperText="Please select a valid state"
-                    />
-                  </Grid>
-                )}
+                <Grid item xs={6}>
+                  <TextField
+                    id="outlined-select-state-native"
+                    name="state"
+                    variant="outlined"
+                    select
+                    value={state}
+                    onChange={handleStateChange}
+                    SelectProps={{
+                      native: true,
+                    }}
+                    helperText="Please select your state"
+                  >
+                    {states.map((state) => (
+                      <option key={state.value} value={state.value}>
+                        {state.label}
+                      </option>
+                    ))}
+                  </TextField>
+                </Grid>
               </Grid>
             </Grid>
 
@@ -155,14 +215,23 @@ export default function Home() {
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
-                    id="locale"
+                    id="outlined-select-locale-native"
+                    name="locale"
                     variant="outlined"
                     select
-                    label="Select"
                     value={locale}
                     onChange={handleLocaleChange}
+                    SelectProps={{
+                      native: true,
+                    }}
                     helperText="Please select your locale"
-                  />
+                  >
+                    {locales.map((locale) => (
+                      <option key={locale.value} value={locale.value}>
+                        {locale.label}
+                      </option>
+                    ))}
+                  </TextField>
                 </Grid>
               </Grid>
             </Grid>
@@ -174,15 +243,14 @@ export default function Home() {
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
-                    id="totalStudents"
+                    id="outlined-number-totalStudents"
+                    name="totalStudents"
                     variant="outlined"
                     type="number"
-                    label=""
-                    defaultValue="0"
                     min="0"
                     value={totalStudents}
                     onChange={handleTotalStudentsChange}
-                    helperText=""
+                    helperText="Enter a number"
                   />
                 </Grid>
               </Grid>
@@ -195,15 +263,14 @@ export default function Home() {
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
-                    id="asianStudents"
+                    id="outlined-number-asianStudents"
+                    name="asianStudents"
                     variant="outlined"
                     type="number"
-                    label=""
-                    defaultValue="0"
                     min="0"
                     value={asianStudents}
                     onChange={handleAsianStudentsChange}
-                    helperText=""
+                    helperText="Enter a number"
                   />
                 </Grid>
               </Grid>
@@ -216,15 +283,14 @@ export default function Home() {
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
-                    id="hispanicStudents"
+                    id="outlined-number-hispanicStudents"
+                    name="hispanicStudents"
                     variant="outlined"
                     type="number"
-                    label=""
-                    defaultValue="0"
                     min="0"
                     value={hispanicStudents}
                     onChange={handleHispanicStudentsChange}
-                    helperText=""
+                    helperText="Enter a number"
                   />
                 </Grid>
               </Grid>
@@ -237,15 +303,14 @@ export default function Home() {
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
-                    id="blackStudents"
+                    id="outlined-number-blackStudents"
+                    name="blackStudents"
                     variant="outlined"
                     type="number"
-                    label=""
-                    defaultValue="0"
                     min="0"
                     value={blackStudents}
                     onChange={handleBlackStudentsChange}
-                    helperText=""
+                    helperText="Enter a number"
                   />
                 </Grid>
               </Grid>
@@ -258,15 +323,14 @@ export default function Home() {
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
-                    id="whiteStudents"
+                    id="outlined-number-whiteStudents"
+                    name="whiteStudents"
                     variant="outlined"
                     type="number"
-                    label=""
-                    defaultValue="0"
                     min="0"
                     value={whiteStudents}
                     onChange={handleWhiteStudentsChange}
-                    helperText=""
+                    helperText="Enter a number"
                   />
                 </Grid>
               </Grid>
@@ -279,15 +343,14 @@ export default function Home() {
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
-                    id="hawaiianStudents"
+                    id="outlined-number-hawaiianStudents"
+                    name="hawaiianStudents"
                     variant="outlined"
                     type="number"
-                    label=""
-                    defaultValue="0"
                     min="0"
                     value={hawaiianStudents}
                     onChange={handleHawaiianStudentsChange}
-                    helperText=""
+                    helperText="Enter a number"
                   />
                 </Grid>
               </Grid>
@@ -300,15 +363,14 @@ export default function Home() {
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
-                    id="mixedStudents"
+                    id="outlined-number-mixedStudents"
+                    name="mixedStudents"
                     variant="outlined"
                     type="number"
-                    label=""
-                    defaultValue="0"
                     min="0"
                     value={mixedStudents}
                     onChange={handleMixedStudentsChange}
-                    helperText=""
+                    helperText="Enter a number"
                   />
                 </Grid>
               </Grid>
@@ -321,15 +383,14 @@ export default function Home() {
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
-                    id="freeLunchStudents"
+                    id="outlined-number-freeLunchStudents"
+                    name="freeLunchStudents"
                     variant="outlined"
                     type="number"
-                    label=""
-                    defaultValue="0"
                     min="0"
                     value={freeLunchStudents}
                     onChange={handleFreeLunchStudentsChange}
-                    helperText=""
+                    helperText="Enter a number"
                   />
                 </Grid>
               </Grid>
@@ -342,30 +403,26 @@ export default function Home() {
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
-                    id="reducedLunchStudents"
+                    id="outlined-number-reducedLunchStudents"
+                    name="reducedLunchStudents"
                     variant="outlined"
                     type="number"
-                    label=""
-                    defaultValue="0"
                     min="0"
                     value={reducedLunchStudents}
                     onChange={handleReducedLunchStudentsChange}
-                    helperText=""
+                    helperText="Enter a number"
                   />
                 </Grid>
               </Grid>
             </Grid>
 
-            <Grid item xs={12} sx={{ justifyContent: "center" }}>
-              <Button
-                variant="contained"
-                onClick={() => console.log("Submitted")}
-              >
+            <Grid item>
+              <Button variant="contained" color="primary" type="submit">
                 SUBMIT
               </Button>
             </Grid>
           </Grid>
-        </div>
+        </form>
       </Box>
     </>
   );
