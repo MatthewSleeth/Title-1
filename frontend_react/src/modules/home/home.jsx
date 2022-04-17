@@ -55,7 +55,7 @@ export default function Home() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
-    fetch("http://localhost:5000/index", {
+    fetch("http://localhost:5000/results", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -64,7 +64,8 @@ export default function Home() {
       body: JSON.stringify(formData),
     })
       .then((response) => response.json())
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .then((data) => console.log(JSON.stringify(data)));
   };
 
   return (
