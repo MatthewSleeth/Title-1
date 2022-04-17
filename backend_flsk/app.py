@@ -39,9 +39,11 @@ def results():
     user_info=[user_state, user_locale, user_total, user_asian, user_hispanic, user_black, user_white, user_hawaiian, user_mixed]
 
     prediction = predict_eval(model, user_info)
+    response = flask.jsonifyy({"prediction":prediction})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+    
     # return render_template("title1_results.html", prediction=prediction)
-    prediction.headers.add('Access-Control-Allow-Origin', '*')
-    return jsonify({"prediction":prediction})
 
 
 # Main
