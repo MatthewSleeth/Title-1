@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState, useHistory } from "react";
+import { useEffect, useState, useReducer } from "react";
 import {
   Box,
   Typography,
@@ -11,20 +11,8 @@ import {
 } from "@mui/material";
 
 export default function Home() {
-  const [state, setState] = useState(1); // enter some default value
-  const [states, setStates] = useState([]); // enter some default value
-  const [locale, setLocale] = useState(); // enter some default value
-  const [locales, setLocales] = useState([]); // enter some default value
-
-  const [totalStudents, setTotalStudents] = useState(); // enter some default value
-  const [asianStudents, setAsianStudents] = useState(); // enter some default value
-  const [hispanicStudents, setHispanicStudents] = useState(); // enter some default value
-  const [blackStudents, setBlackStudents] = useState(); // enter some default value
-  const [whiteStudents, setWhiteStudents] = useState(); // enter some default value
-  const [hawaiianStudents, setHawaiianStudents] = useState(); // enter some default value
-  const [mixedStudents, setMixedStudents] = useState(); // enter some default value
-  const [freeLunchStudents, setFreeLunchStudents] = useState(); // enter some default value
-  const [reducedLunchStudents, setReducedLunchStudents] = useState(); // enter some default value
+  const [states, setStates] = useState([]);
+  const [locales, setLocales] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:8000/states")
@@ -34,13 +22,49 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:8080/locales")
+    fetch("http://localhost:8050/locales")
       .then((response) => response.json())
       .then((data) => setLocales(data))
       .catch((error) => console.log(error));
   }, []);
 
-  // const [formValues, setFormValues] = useState(defaultValues);
+  const initialFormData = Object.freeze({
+    state: "",
+    locale: null,
+    totalStudents: null,
+    asianStudents: null,
+    hispanicStudents: null,
+    blackStudents: null,
+    whiteStudents: null,
+    hawaiianStudents: null,
+    mixedStudents: null,
+    freeLunchStudents: null,
+    reducedLunchStudents: null,
+  });
+
+  const [formData, updateFormData] = useState(initialFormData);
+
+  const handleChange = (event) => {
+    updateFormData({
+      ...formData,
+      [event.target.name]: event.target.value.trim(),
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(formData);
+    fetch("http://localhost:5000/index", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .catch((error) => console.log(error));
+  };
 
   // useEffect(() => {
   //   fetch("http://localhost:5000/results", {
@@ -53,56 +77,6 @@ export default function Home() {
   //     .then((response) => setResult(response))
   //     .catch((error) => console.log(error));
   // }, []);
-
-  const handleStateChange = (event) => {
-    setState(event.target.value);
-  };
-
-  const handleLocaleChange = (event) => {
-    setLocale(event.target.value);
-  };
-
-  const handleTotalStudentsChange = (event) => {
-    setTotalStudents(event.target.value);
-  };
-
-  const handleAsianStudentsChange = (event) => {
-    setAsianStudents(event.target.value);
-    console.log(event.target.value);
-  };
-
-  const handleHispanicStudentsChange = (event) => {
-    setHispanicStudents(event.target.value);
-  };
-
-  const handleBlackStudentsChange = (event) => {
-    setBlackStudents(event.target.value);
-  };
-
-  const handleWhiteStudentsChange = (event) => {
-    setWhiteStudents(event.target.value);
-  };
-
-  const handleHawaiianStudentsChange = (event) => {
-    setHawaiianStudents(event.target.value);
-  };
-
-  const handleMixedStudentsChange = (event) => {
-    setMixedStudents(event.target.value);
-  };
-
-  const handleFreeLunchStudentsChange = (event) => {
-    setFreeLunchStudents(event.target.value);
-  };
-
-  const handleReducedLunchStudentsChange = (event) => {
-    setReducedLunchStudents(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Working");
-  };
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
@@ -119,7 +93,7 @@ export default function Home() {
   //     freeLunchStudents &&
   //     reducedLunchStudents
   //   ) {
-  //     fetch("http://localhost:8000/user.json", {
+  //     fetch("http://localhost:8080/user.json", {
   //       method: "POST",
   //       headers: { "Content-type": "application/json" },
   //       body: JSON.stringify({
@@ -135,8 +109,7 @@ export default function Home() {
   //         freeLunchStudents,
   //         reducedLunchStudents,
   //       }),
-  //     })
-  //     .then(() => history.push("/"));
+  //     });
   //   }
   // };
 
@@ -165,7 +138,7 @@ export default function Home() {
         </Typography>
       </Box>
       <Box
-        component="form"
+        component="div"
         sx={{
           height: 600,
           maxheight: false,
@@ -191,15 +164,14 @@ export default function Home() {
                     name="state"
                     variant="outlined"
                     select
-                    value={state}
-                    onChange={handleStateChange}
+                    onChange={handleChange}
                     SelectProps={{
                       native: true,
                     }}
                     helperText="Please select your state"
                   >
                     {states.map((state) => (
-                      <option key={state.value} value={state.value}>
+                      <option key={state.id} value={state.value}>
                         {state.label}
                       </option>
                     ))}
@@ -219,15 +191,14 @@ export default function Home() {
                     name="locale"
                     variant="outlined"
                     select
-                    value={locale}
-                    onChange={handleLocaleChange}
+                    onChange={handleChange}
                     SelectProps={{
                       native: true,
                     }}
                     helperText="Please select your locale"
                   >
                     {locales.map((locale) => (
-                      <option key={locale.value} value={locale.value}>
+                      <option key={locale.id} value={locale.value}>
                         {locale.label}
                       </option>
                     ))}
@@ -248,8 +219,7 @@ export default function Home() {
                     variant="outlined"
                     type="number"
                     min="0"
-                    value={totalStudents}
-                    onChange={handleTotalStudentsChange}
+                    onChange={handleChange}
                     helperText="Enter a number"
                   />
                 </Grid>
@@ -268,8 +238,7 @@ export default function Home() {
                     variant="outlined"
                     type="number"
                     min="0"
-                    value={asianStudents}
-                    onChange={handleAsianStudentsChange}
+                    onChange={handleChange}
                     helperText="Enter a number"
                   />
                 </Grid>
@@ -288,8 +257,7 @@ export default function Home() {
                     variant="outlined"
                     type="number"
                     min="0"
-                    value={hispanicStudents}
-                    onChange={handleHispanicStudentsChange}
+                    onChange={handleChange}
                     helperText="Enter a number"
                   />
                 </Grid>
@@ -308,8 +276,7 @@ export default function Home() {
                     variant="outlined"
                     type="number"
                     min="0"
-                    value={blackStudents}
-                    onChange={handleBlackStudentsChange}
+                    onChange={handleChange}
                     helperText="Enter a number"
                   />
                 </Grid>
@@ -328,8 +295,7 @@ export default function Home() {
                     variant="outlined"
                     type="number"
                     min="0"
-                    value={whiteStudents}
-                    onChange={handleWhiteStudentsChange}
+                    onChange={handleChange}
                     helperText="Enter a number"
                   />
                 </Grid>
@@ -348,8 +314,7 @@ export default function Home() {
                     variant="outlined"
                     type="number"
                     min="0"
-                    value={hawaiianStudents}
-                    onChange={handleHawaiianStudentsChange}
+                    onChange={handleChange}
                     helperText="Enter a number"
                   />
                 </Grid>
@@ -368,8 +333,7 @@ export default function Home() {
                     variant="outlined"
                     type="number"
                     min="0"
-                    value={mixedStudents}
-                    onChange={handleMixedStudentsChange}
+                    onChange={handleChange}
                     helperText="Enter a number"
                   />
                 </Grid>
@@ -388,8 +352,7 @@ export default function Home() {
                     variant="outlined"
                     type="number"
                     min="0"
-                    value={freeLunchStudents}
-                    onChange={handleFreeLunchStudentsChange}
+                    onChange={handleChange}
                     helperText="Enter a number"
                   />
                 </Grid>
@@ -408,8 +371,7 @@ export default function Home() {
                     variant="outlined"
                     type="number"
                     min="0"
-                    value={reducedLunchStudents}
-                    onChange={handleReducedLunchStudentsChange}
+                    onChange={handleChange}
                     helperText="Enter a number"
                   />
                 </Grid>
