@@ -15,6 +15,18 @@ model = load_model(data)
 def new_form():
     return render_template("title1_form.html")
 
+@app.route("/the_problem")
+def problem():
+    return render_template("the_problem.html")
+
+@app.route("/charts_and_graphs")
+def charts_and_graphs():
+    return render_template("charts_and_graphs.html")
+
+@app.route("/the_solution")
+def solution():
+    return render_template("the_solution.html")
+
 @app.route("/results", methods=["POST"])
 def results():
     state_encodings = {'CA':1,'WY':2,'MO':3,'TX':4,'OK':5,'MS':6, 'KY':7,'ID':8,'OR':9,'WI':10, 'ME':11,'MA':12,'NC':13,'VA':14,
