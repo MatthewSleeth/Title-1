@@ -1,0 +1,33 @@
+﻿{% extends "master_page.html" %}
+{% block style %}
+<style>
+    body {
+        background-color: #001f3d
+    }
+</style>
+{% endblock %}
+{% block content %}
+<h1 style="color:white; text-align:center;">
+    Charts and Graphs
+</h1>
+<div>
+    <div style="justify-content:center; background-color:peachpuff">
+        <div class="case" style="display: inline-block; margin-right: 100px; margin-left: 100px; margin-top: 5%; margin-bottom: 5%;">
+            <a href="/" style=" background-color: #001f3d; top: 15%; position: absolute; right: 48%; left: 48%;" class="pure-button pure-button-primary">Home</a>
+            <p>
+                The table below is how our processed data looks like before it is used to train our model. We have used encoding to code categorical variables and scaler methods to normalize the numerical variables to reduce bias in our prediction.
+            </p>
+            <img style="width:38%; display:block; margin-left:auto; margin-right:auto" src="../static/img/preprojectnumbers.png" alt="">
+            <p>
+                The table below shows the accuracy of our models under different parameters. Based on these accuracy stats, we have trained a KNN model with 15 neighbors and Minkowski metric on the training data. This trained model will be used to predict a school’s poverty status in our web application.
+            </p>
+            <img style="width:30%; display:block; margin-left:auto; margin-right:auto" src="../static/img/hfproject numbers.png" alt="">
+            <p>
+                We have labeled the schools into 3 categories: 0, 1, and 2 based on whether a school has less than national average proportion of students eligible for free lunch (0), higher than average proportion of students eligible for free lunch (1), or higher than 75th percentile of the proportion of students eligible for free lunch (2). The graph below shows the proportion of schools labeled by each category and grouped by the locale of the school. Schools labeled 2 would need to be prioritized for Title I eligibility and our machine learning model is trained to predict if a school falls under one of these three categories.
+            </p>
+            <img style="width:30%; display:block; margin-left:auto; margin-right:auto" src="../static/img/nces chart.png" alt="">
+            <a href="/the_solution" style=" background-color: #001f3d; top: 1270px; position: absolute; right: 45%; left: 45%;" class="pure-button pure-button-primary">The Solution</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

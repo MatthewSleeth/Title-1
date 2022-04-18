@@ -1,0 +1,31 @@
+﻿{% extends "master_page.html" %}
+{% block style %}
+<style>
+    body {
+        background-color: #001f3d
+    }
+</style>
+{% endblock %}
+{% block content %}
+<h1 style="color:white; text-align:center;">
+    The Solution
+</h1>
+<div>
+    <div style="justify-content:center; background-color:peachpuff">
+        <div class="case" style="display: inline-block; margin-right: 100px; margin-left: 100px; margin-top: 5%; margin-bottom: 5%;">
+            <a href="/" style=" background-color: #001f3d; top: 15%; position: absolute; right: 48%; left: 48%;" class="pure-button pure-button-primary">Home</a>
+            <img style="display:block; margin-left:auto; margin-right:auto" src="https://learningforward.org/wp-content/uploads/2020/04/how-do-i-know-my-students-are-learning.jpg" alt="">
+            <p>
+                The fact that Title I grants are regularly abused is a well-documented problem. Many solutions have been proposed and implemented, such as the Basic Grant, Concentration Grant, Targeted Grant, and Eductation Finance Incentive Grant. These various grants are distributed based on different criteria, such as schools with large poverty rates, as well as grants given based on a school's state ranking. However, many school districts have been known to gerrymander and submit information and numbers that are not technically accurate. Because of this, the most impoversed schools in the country are not getting the adequate funding they require. Among this, schools with just a poverty rate of greater than 40% are eligible for Schoolwide Programs from Title I. Because of this, more than 50% of public schools have schoolwide programs from Title I. This means that there either need be stricter requirements for Title I grants, or simply more funding for Title I, which currently sits at $14 billion per year.
+            </p>
+            <img style="width:20%; display:block; margin-left:auto; margin-right:auto" src="../static/img/nces.png" alt="">
+            <p>
+                Our personal solution to this problem was to develop a web app that easily informs whether or not a school is eligible for Title I grants. We implemented Machine Learning for an easier classification of Title I schools. For our label, we used a proportion of free lunch eligible students, which itself is in need of adjustment. Data from the NCES in the last five years such as racial demographics, location, and average revenue were used in determining whether or not the school is Title I eligible. This will keep a more in check record of school information for grants, as well as determine exact facts needed for a prediction on whether or not the school is eligible.
+            </p>
+            <a href="/" style=" background-color: #001f3d; top: 1135px; position: absolute; right: 48%; left: 48%;" class="pure-button pure-button-primary">Home</a>
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}
