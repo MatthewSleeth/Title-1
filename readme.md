@@ -15,9 +15,6 @@
 
 1. python app.py
 
-### Screenshots
-
-
 ### Licensing 
 
 Copyright <2022> <Matthew Sleeth, Bigyan Bhandari, Arjit Jain, Evan Faust>
