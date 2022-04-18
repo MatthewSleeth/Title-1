@@ -1,0 +1,23 @@
+{ "locales": [
+    {"id": 1, "label": "1-Large City", "value": 108},
+    {"id": 2, "label": "2-Midsize City", "value": 104},
+    {"id": 3, "label": "3-Urban Fringe of Large City", "value": 101},
+    {"id": 4, "label": "4-Urban Fringe of Midsize City", "value": 107},
+    {"id": 5, "label": "5-Large Town", "value": 103},
+    {"id": 6, "label": "6-Small Town", "value": 102},
+    {"id": 7, "label": "7-Rural-Outside CBSA/MSA", "value": 106},
+    {"id": 8, "label": "8-Rural-Inside CBSA/MSA", "value": 105},
+    {"id": 9, "label": "11-City: Large", "value": 113},
+    {"id": 10, "label": "12-City: Midsize", "value": 117},
+    {"id": 11, "label": "13-City: Small", "value": 114},
+    {"id": 12, "label": "21-Suburb: Large", "value": 111},
+    {"id": 13, "label": "22-Suburb: Midsize", "value": 110},
+    {"id": 14, "label": "23-Suburb: Small", "value": 120},
+    {"id": 15, "label": "31-Town: Fringe", "value": 119},
+    {"id": 16, "label": "32-Town: Distant", "value": 118},
+    {"id": 17, "label": "33-Town: Remote", "value": 116},
+    {"id": 18, "label": "41-Rural: Fringe", "value": 109},
+    {"id": 19, "label": "42-Rural: Distant", "value": 112},
+    {"id": 20, "label": "43-Rural: Remote", "value": 115}
+]
+}
