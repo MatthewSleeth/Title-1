@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    {% block style %}
+
+    {% endblock %}
+    <style>
+        .case {
+            border: 1px solid;
+            padding: 10px;
+            box-shadow: 0px 0px 0.25em inset;
+            background-color: whitesmoke;
+        }
+    </style>
+    <meta charset="utf-8" />
+    <title>Title I Funding - Eligibility Predictor </title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.1.0/build/pure-min.css" integrity="sha384-yHIFVG6ClnONEA5yB5DJXfW2/KC173DIQrYoZMEtBvGzmf0PKiGyNEqe9N6BNDBH" crossorigin="anonymous">
+</head>
+<body>
+    {% block content %}
+    {% endblock %}
+</body>
+<footer style="background-color:#001f3d; height:50px;">
+    <p style="color:white; text-align:center;">
+        <b>Disclaimer: </b>To contextualize the result, you can just add this line from our report to the results page: Of the 84589 school data available for year 2019-20, 75% schools were eligible for Title I assistance. Our model predicts 80% schools to have high poverty and therefore should be considered eligible for Title I assistance. Please visit this US Department of Education link (<a style="color:whitesmoke" href="https://www2.ed.gov/programs/titleiparta/applicant.html">https://www2.ed.gov/programs/titleiparta/applicant.html</a>) for more information about how your school can apply for Title I funding.
+    </p>
+    {% block javascript %}
+    {% endblock %}
+</footer>
+</html>
